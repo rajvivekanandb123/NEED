@@ -1,0 +1,3074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEED Organization</title>
+    <!-- Add Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            cursor: default;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #f7f8fa;
+            padding-top: 64px !important;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 70px;
+            color: #2c3e50;
+            font-weight: 600;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #d35400);
+            border-radius: 2px;
+        }
+
+        .section-title:before {
+            content: '';
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #d35400);
+            border-radius: 2px;
+        }
+
+        /* Project Container Styles */
+        .project-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .project-flex {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 100px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+        }
+
+        .project-flex:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-flex.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* Project Content Styles */
+        .project-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 2.4rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .project-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: #e67e22;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Achievement List Styles */
+        .achievement-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .achievement-list li {
+            margin: 20px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .achievement-list li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+            font-weight: bold;
+        }
+
+        /* Image Grid Styles */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        /* Special styles for sporting club images */
+        .sporting-club .image-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .sporting-club .image-grid img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sporting-club .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .sporting-club .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Universal image hover effects - this will apply to ALL images */
+        .image-grid img,
+        .project-images img,
+        .about-image img {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Create hover overlay for all images */
+        .image-grid img::before,
+        .project-images img::before,
+        .about-image img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .image-grid img:hover::before,
+        .project-images img:hover::before,
+        .about-image img:hover::before {
+            opacity: 1;
+        }
+
+        /* Blue dot for all images */
+        .image-grid img::after,
+        .project-images img::after,
+        .about-image img::after {
+            content: '\f065'; /* Font Awesome expand icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: white;
+            font-size: 1.5rem;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            background: #3498db; /* A blue color */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .image-grid img:hover::after,
+        .project-images img:hover::after,
+        .about-image img:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Hover scale effect for all images */
+        .image-grid img:hover,
+        .project-images img:hover,
+        .about-image img:hover {
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .image-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .image-wrapper::after {
+            content: '\f065'; /* Font Awesome expand icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: white;
+            font-size: 1.5rem;
+            z-index: 2;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            background: #3498db; /* A blue color */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-wrapper:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        /* Ensure images in grids maintain their original styling */
+        .image-grid .image-wrapper img {
+            height: 250px;
+        }
+
+        .tanabana-grid .image-wrapper img {
+            height: 180px;
+        }
+
+        .water-project .image-wrapper img {
+            height: 400px;
+        }
+
+        .sporting-club .image-wrapper img {
+            height: 200px;
+        }
+
+        /* Special Styles for Har Ghar Nal Se Jal */
+        .water-project .image-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .water-project .image-grid img {
+            height: 400px;
+            width: 100%;
+        }
+
+        /* Section Specific Styles */
+        .education-projects {
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+        }
+
+        .women-empowerment {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0b2 100%);
+        }
+
+        .livelihood-projects {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e1f5fe 100%);
+        }
+
+        .community-projects {
+            background: linear-gradient(135deg, #f1f8e9 0%, #dcedc8 100%);
+        }
+
+        /* Tanabana Special Styles */
+        .tanabana-section {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tanabana-flex {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .tanabana-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .tanabana-grid .image-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .tanabana-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.4s;
+        }
+        .tanabana-grid .image-wrapper:hover img {
+            transform: scale(1.08);
+        }
+        .tanabana-content {
+            min-width: 300px;
+            max-width: 500px;
+            margin-left: 20px;
+        }
+        @media (max-width: 992px) {
+            .tanabana-flex {
+                flex-direction: column;
+                gap: 25px;
+            }
+            .tanabana-content {
+                margin-left: 0;
+                max-width: 100%;
+            }
+            .tanabana-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .tanabana-section {
+                padding: 20px 8px;
+            }
+            .tanabana-grid {
+                grid-template-columns: 1fr;
+            }
+            .tanabana-grid img {
+                height: 140px;
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 1200px) {
+            .project-flex {
+                gap: 40px;
+                padding: 30px;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .image-grid img {
+                height: 200px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .project-flex {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .project-flex.reverse {
+                flex-direction: column;
+            }
+
+            .project-images, .project-content {
+                width: 100%;
+            }
+
+            .tanabana-section .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .water-project .image-grid img {
+                height: 300px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 50px;
+            }
+
+            .project-flex {
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: 1.8rem;
+            }
+
+            .achievement-list li {
+                font-size: 1rem;
+            }
+
+            .image-grid {
+                gap: 15px;
+            }
+
+            .image-grid img {
+                height: 180px;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tanabana-section .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .water-project .image-grid img {
+                height: 250px;
+            }
+        }
+
+        section {
+            transition: all 0.3s ease;
+        }
+
+        section:hover {
+            cursor: pointer;
+            transform: scale(1.01);
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            min-height: 95vh;
+            height: 95vh;
+            max-height: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.22),rgba(0, 0, 0, 0.22)), url('abhi.jpeg') center/cover no-repeat;
+        }
+        @media (max-width: 900px) {
+            .hero-section {
+                min-height: 75vh;
+                height: 75vh;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero-section {
+                min-height: 55vh;
+                height: 55vh;
+            }
+        }
+        @media (max-width: 400px), (max-width: 360px) {
+            .hero-section {
+                min-height: 45vh;
+                height: 45vh;
+            }
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.18);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            padding: 40px 10px 30px 10px;
+        }
+        .hero-content h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 1.25rem;
+            }
+            .hero-content p {
+                font-size: 0.78rem;
+            }
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            padding: 0 30px;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+
+        .about-text h2 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-item i {
+            font-size: 1.5rem;
+            color: #e67e22;
+        }
+
+        .highlight-item span {
+            font-size: 1rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #e67e22;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media screen and (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .about-text {
+                padding-right: 0;
+            }
+
+            .about-image {
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .about-highlights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .about-section {
+                padding: 60px 0;
+            }
+
+            .about-text h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .about-container {
+                padding: 0 20px;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item {
+                padding: 15px;
+            }
+
+            .highlight-item {
+                padding: 12px;
+            }
+
+            .highlight-item i {
+                font-size: 1.2rem;
+            }
+        }
+
+        .vision-mission-section {
+            background: linear-gradient(135deg, #f6f8f9 0%, #e5ebee 100%);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .vision-mission-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .values-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .values-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+            color: #555;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .values-list li i {
+            color: #e67e22;
+            font-size: 1.2rem;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        /* Specific card styles */
+        .vision-card .card-icon {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+
+        .mission-card .card-icon {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .values-card .card-icon {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        }
+
+        @media screen and (max-width: 992px) {
+            .vision-mission-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .vision-mission-section {
+                padding: 60px 0;
+            }
+
+            .vision-mission-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+
+            .card-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .card-icon i {
+                font-size: 2rem;
+            }
+
+            .card h3 {
+                font-size: 1.6rem;
+            }
+
+            .values-list li {
+                font-size: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .vision-mission-container {
+                padding: 0 20px;
+            }
+
+            .card {
+                padding: 25px 15px;
+            }
+
+            .card-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 20px;
+            }
+
+            .card-icon i {
+                font-size: 1.8rem;
+            }
+
+            .card h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            .values-list li {
+                font-size: 0.95rem;
+                margin: 10px 0;
+            }
+        }
+
+        /* Support & Collaborations Section Styles */
+        .support-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .support-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .support-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .support-intro p {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .partner-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .partner-card:hover::before {
+            opacity: 1;
+        }
+
+        .partner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .partner-card i {
+            font-size: 2.5rem;
+            color: #e67e22;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .partner-card h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        @media screen and (max-width: 992px) {
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .support-section {
+                padding: 60px 0;
+            }
+
+            .support-intro p {
+                font-size: 1.1rem;
+            }
+
+            .partner-card {
+                padding: 25px;
+            }
+
+            .partner-card i {
+                font-size: 2rem;
+            }
+
+            .partner-card h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .partners-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .support-container {
+                padding: 0 20px;
+            }
+
+            .partner-card {
+                padding: 20px;
+            }
+        }
+
+        /* Loading Animation Styles */
+        .loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2147483645 !important;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loader-wrapper.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            animation: rotate 2s linear infinite;
+        }
+
+        .loader-circle {
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-top-color: #e67e22;
+            border-radius: 50%;
+            position: absolute;
+            animation: rotate 1.5s ease-in-out infinite;
+        }
+
+        .loader-circle:nth-child(2) {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border-top-color: #2c3e50;
+            animation-delay: 0.2s;
+        }
+
+        .loader-circle:nth-child(3) {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border-top-color: #e67e22;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hero Content Animation */
+        .hero-content h1 {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        .hero-content p {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.7s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2147483646 !important;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.8);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.active .modal-image {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-prev {
+            left: 20px;
+        }
+
+        .modal-next {
+            right: 20px;
+        }
+
+        .modal-nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-nav-button i {
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-nav-button:hover i {
+            transform: scale(1.2);
+        }
+
+        .modal-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            z-index: 1000;
+        }
+
+        @media screen and (max-width: 768px) {
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .modal-nav-button {
+                width: 45px;
+                height: 45px;
+            }
+
+            .modal-close {
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
+            }
+
+            .modal-nav-button i {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .modal-nav-button {
+                width: 40px;
+                height: 40px;
+            }
+
+            .modal-close {
+                width: 35px;
+                height: 35px;
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Loading animation for images */
+        .image-wrapper.loading::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #e67e22;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .main-partner-logo img {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .partner-link {
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+        .partner-link:hover {
+            box-shadow: 0 8px 30px rgba(230,126,34,0.12);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .highlight-flash {
+            box-shadow: 0 0 0 4px #e67e22, 0 0 20px 8px #ffe0b2;
+            border-radius: 18px !important;
+            transition: box-shadow 0.4s;
+            z-index: 10;
+            position: relative;
+        }
+        .video-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .kabaddi-video {
+            width: 100%;
+            max-width: 600px;
+            max-height: 340px;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+            object-fit: cover;
+            background: #000;
+        }
+        @media (max-width: 768px) {
+            .kabaddi-video {
+                max-width: 100%;
+                max-height: 220px;
+            }
+        }
+
+        /* Contact Modal Styles */
+        .contact-modal-backdrop {
+          position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+          background: rgba(30,30,40,0.25);
+          z-index: 2147483647;
+          display: none; align-items: center; justify-content: center;
+          transition: background 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        .contact-modal-backdrop.active { display: flex; }
+        .contact-modal {
+          background: rgba(255,255,255,0.85);
+          box-shadow: 0 8px 40px rgba(44,62,80,0.18);
+          border-radius: 24px;
+          padding: 40px 32px 32px 32px;
+          max-width: 370px;
+          width: 90vw;
+          position: relative;
+          animation: contactModalIn 0.7s cubic-bezier(.4,0,.2,1);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          display: flex; flex-direction: column; align-items: center;
+        }
+        @keyframes contactModalIn {
+          0% { opacity: 0; transform: translateY(60px) scale(0.95); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .contact-modal-close {
+          position: absolute; top: 18px; right: 18px;
+          background: rgba(230,126,34,0.08);
+          border: none; border-radius: 50%; width: 38px; height: 38px;
+          font-size: 1.5rem; color: #e67e22; cursor: pointer;
+          display: flex; align-items: center; justify-content: center;
+          transition: background 0.2s;
+          z-index: 2;
+        }
+        .contact-modal-close:hover { background: #e67e22; color: #fff; }
+        .contact-modal-title {
+          font-size: 1.3rem; font-weight: 700; color: #2c3e50; margin-bottom: 18px; text-align: center;
+          letter-spacing: 1px;
+        }
+        .contact-modal-list {
+          list-style: none; padding: 0; margin: 0; width: 100%;
+        }
+        .contact-modal-item {
+          display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
+          opacity: 0; transform: translateY(30px);
+          animation: contactModalItemIn 0.7s cubic-bezier(.4,0,.2,1) forwards;
+        }
+        .contact-modal-item:nth-child(1) { animation-delay: 0.15s; }
+        .contact-modal-item:nth-child(2) { animation-delay: 0.3s; }
+        .contact-modal-item:nth-child(3) { animation-delay: 0.45s; }
+        .contact-modal-item:nth-child(4) { animation-delay: 0.6s; }
+        .contact-modal-item:nth-child(5) { animation-delay: 0.75s; }
+        @keyframes contactModalItemIn {
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .contact-modal-icon {
+          width: 36px; height: 36px; border-radius: 50%; background: #ffe0b2;
+          color: #e67e22; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+          flex-shrink: 0;
+        }
+        .contact-modal-text { color: #2c3e50; font-size: 1rem; line-height: 1.6; }
+        @media (max-width: 500px) {
+          .contact-modal { padding: 22px 6vw 18px 6vw; }
+          .contact-modal-title { font-size: 1.1rem; }
+        }
+
+        .about-section, .about-section .about-text, .about-section .about-text p, .about-section .about-text h2 {
+            color: #222 !important;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.15);
+        }
+
+        .footer {
+            background: #fff;
+            color: #222;
+            padding: 40px 0;
+            border-top: 1.5px solid #ececec;
+            box-shadow: 0 -2px 16px rgba(44,62,80,0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .footer-info, .footer-links-section {
+            flex: 1;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            background: #fff;
+        }
+        .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .footer-brand-text h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .footer-brand-text p {
+            color: #888;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        .footer-about {
+            color: #555;
+            margin-top: 10px;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+        .footer-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background: #e67e22;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        .footer-link a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link a:hover {
+            color: #e67e22;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .footer-social-link {
+            width: 35px;
+            height: 35px;
+            background: #f7f7f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .footer-social-link:hover {
+            background: #e67e22;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ececec;
+            padding-top: 20px;
+            color: #888;
+            font-size: 0.97rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-brand {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+        }
+
+        .tanabana-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .tanabana-layout .project-title {
+            grid-column: 1 / -1; /* Span across both columns */
+        }
+
+        .tanabana-layout .project-images {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .tanabana-layout .project-content {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 2147483647 !important;
+            background: #fff;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.07);
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', Arial, sans-serif;
+            border-bottom: 2px solid #f3f3f3;
+            transition: box-shadow 0.2s;
+        }
+        .navbar-container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 40px;
+            height: 80px;
+            gap: 0;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            text-decoration: none;
+            margin-right: 48px;
+        }
+        .navbar-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2.5px solid #e67e22;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(230,126,34,0.10);
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1;
+        }
+        .brand-name {
+            color: #e67e22;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+        }
+        .brand-tagline {
+            color: #888;
+            font-size: 0.93rem;
+            font-weight: 500;
+            letter-spacing: 0.7px;
+            margin-top: 1px;
+        }
+        @media (max-width: 600px) {
+            .brand-text {
+                align-items: flex-start;
+                justify-content: center !important;
+            }
+            .brand-name {
+                font-size: 1.05rem;
+                margin-bottom: 0;
+                margin-top: 4px;
+            }
+            .brand-tagline {
+                font-size: 0.68rem;
+                margin-top: 0;
+            }
+            .navbar-logo {
+                width: 48px;
+                height: 48px;
+            }
+            .donate-btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+                border-radius: 16px;
+                height: 32px;
+                line-height: 20px;
+            }
+            .navbar-toggle {
+                margin-right: 9px !important;
+            }
+            .navbar-container {
+                padding-right: 12px !important;
+            }
+        }
+        /* Hero Section Responsive Fixes */
+        .hero-section {
+            position: relative;
+            min-height: 95vh;
+            height: 95vh;
+            max-height: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.22),rgba(0, 0, 0, 0.22)), url('abhi.jpeg') center/cover no-repeat;
+        }
+        @media (max-width: 900px) {
+            .hero-section {
+                min-height: 75vh;
+                height: 75vh;
+            }
+        }
+        @media (max-width: 600px) {
+            .hero-section {
+                min-height: 55vh;
+                height: 55vh;
+            }
+        }
+        @media (max-width: 400px), (max-width: 360px) {
+            .hero-section {
+                min-height: 45vh;
+                height: 45vh;
+            }
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.18);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            padding: 40px 10px 30px 10px;
+        }
+        .hero-content h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 1.25rem;
+            }
+            .hero-content p {
+                font-size: 0.78rem;
+            }
+        }
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+            margin-left: auto;
+        }
+        .nav-list {
+            display: flex;
+            gap: 14px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-left: auto;
+        }
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.93rem;
+            font-weight: 600;
+            padding: 10px 0 8px 0;
+            border-radius: 3px;
+            background: none;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            transition: color 0.18s, background 0.18s;
+        }
+        .nav-link:after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.22s cubic-bezier(.4,0,.2,1);
+        }
+        .nav-link:hover, .nav-link:focus {
+            color: #e67e22;
+            background: rgba(230,126,34,0.06);
+        }
+        .nav-link:hover:after, .nav-link:focus:after {
+            width: 100%;
+        }
+        .social-links {
+            display: flex !important;
+            gap: 12px;
+            margin-left: auto;
+        }
+        .social-link {
+            color: #2c3e50;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f7;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .social-link.instagram {
+            color: #E4405F;
+        }
+        .social-link.youtube {
+            color: #FF0000;
+        }
+        .social-link:hover, .social-link:focus {
+            background: #e67e22;
+            color: #fff;
+        }
+        .social-link.instagram:hover, .social-link.instagram:focus {
+            background: #E4405F;
+            color: #fff;
+        }
+        .social-link.youtube:hover, .social-link.youtube:focus {
+            background: #FF0000;
+            color: #fff;
+        }
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #2c3e50;
+            cursor: pointer;
+            font-size: 2rem;
+            margin-left: 18px;
+        }
+        @media (max-width: 900px) {
+            .navbar-container { padding: 0 10px; }
+            .nav-list { gap: 12px; }
+            .navbar-menu { gap: 0; }
+        }
+        @media (max-width: 768px) {
+            .navbar { height: 60px; }
+            body { padding-top: 60px !important; }
+            .navbar-container { height: 60px; }
+            .navbar-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 180px;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 24px rgba(44,62,80,0.10);
+                padding: 12px 0 12px 12px;
+                gap: 0;
+                display: none;
+            }
+            .navbar-menu.active { display: flex; }
+            .nav-list { flex-direction: column; gap: 6px; width: 100%; }
+            .social-links { margin-left: 0; margin-top: 12px; }
+            .navbar-toggle { display: block; }
+        }
+        @media (max-width: 400px) {
+            .navbar-menu {
+                padding-top: 48px !important;
+            }
+            .nav-list {
+                margin-top: 8px;
+            }
+        }
+
+        /* Add Donate button styles */
+        .donate-btn {
+            display: inline-block;
+            margin-left: 32px;
+            padding: 6px 22px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            color: #fff !important;
+            font-size: 1.01rem;
+            font-weight: 700;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(230,126,34,0.13);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: none;
+            outline: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .donate-btn {
+                margin: 12px 0 0 0;
+                width: 100%;
+                text-align: center;
+                padding: 8px 0;
+            }
+        }
+        .donate-btn:hover, .donate-btn:focus {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(230,126,34,0.18);
+        }
+
+        .volunteer-btn {
+            display: inline-block;
+            margin-left: 18px;
+            padding: 6px 22px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            color: #fff !important;
+            font-size: 1.01rem;
+            font-weight: 700;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(39,174,96,0.13);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: none;
+            outline: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+        .volunteer-btn:hover, .volunteer-btn:focus {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(39,174,96,0.18);
+        }
+        @media (max-width: 768px) {
+            .volunteer-btn {
+                margin: 12px 0 0 0;
+                width: 100%;
+                text-align: center;
+                padding: 8px 0;
+            }
+        }
+        @media (min-width: 992px) {
+            .social-link.instagram {
+                margin-left: 3px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .navbar-menu {
+                padding-top: 48px !important;
+            }
+            .nav-list {
+                margin-top: 8px;
+            }
+        }
+    </style>
+    <style>
+    @media (max-width: 992px) {
+      .footer-grid {
+        display: block;
+      }
+      .footer-row-flex {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0;
+        width: 100%;
+      }
+      .footer-quick-links {
+        flex: 1;
+        text-align: left;
+      }
+      .footer-projects {
+        flex: 1;
+        text-align: right;
+      }
+      .footer-contact {
+        margin-top: 24px;
+        width: 100%;
+        text-align: left;
+      }
+    }
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .footer-row-flex {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .footer-quick-links {
+        text-align: left;
+        margin-left: 20px;
+      }
+      .footer-projects {
+        text-align: right;
+        margin-right: 20px;
+      }
+      .footer-contact {
+        text-align: center;
+        grid-column: 1 / -1;
+        margin-top: 20px;
+      }
+    }
+    @media (max-width: 600px) {
+      .footer-row-flex {
+        flex-direction: column;
+        text-align: left;
+      }
+      .footer-projects {
+        text-align: left;
+        margin-top: 18px;
+      }
+    }
+    </style>
+    <style>
+    /* Donate button next to menu icon on mobile/tablet */
+    .navbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .donate-mobile {
+        display: none;
+    }
+    @media (max-width: 768px) {
+        .donate-mobile {
+            display: inline-block !important;
+            margin-left: 0;
+            padding: 8px 18px;
+            font-size: 0.98rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(230,126,34,0.13);
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            color: #fff !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+        }
+        .navbar-menu .donate-btn {
+            display: none !important;
+        }
+    }
+    @media (min-width: 769px) {
+        .navbar-actions {
+            display: none;
+        }
+        .navbar-menu .donate-btn {
+            display: inline-block !important;
+        }
+    }
+    </style>
+    <style>
+        @media (max-width: 400px), (max-width: 360px) {
+            .navbar-container {
+                padding: 0 4px;
+                height: 48px;
+            }
+            .navbar-logo {
+                width: 36px;
+                height: 36px;
+            }
+            .brand-text {
+                justify-content: center !important;
+            }
+            .brand-name {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+                margin-top: 12px !important;
+            }
+            .brand-tagline {
+                display: none !important;
+            }
+            .brand-tagline {
+                font-size: 0.52rem;
+                letter-spacing: 0.2px;
+            }
+            .navbar {
+                height: 48px;
+            }
+            .hero-section {
+                min-height: 180px;
+            }
+            .hero-content {
+                padding: 18px 2px 12px 2px;
+            }
+            .hero-content h1 {
+                font-size: 0.98rem;
+                margin-bottom: 4px;
+            }
+            .hero-content p {
+                font-size: 0.55rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.jpeg" alt="NEED Logo" class="navbar-logo">
+                <div class="brand-text">
+                    <span class="brand-name">NEED</span>
+                    <span class="brand-tagline">Natural Education for Ecological Development</span>
+                </div>
+            </a>
+            <div class="navbar-actions">
+                <a href="donate.html" class="donate-btn donate-mobile">Donate</a>
+                <button class="navbar-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="navbar-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#vision-mission" class="nav-link">Our Values</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="media.html" class="nav-link">Media</a></li>
+                    <li><a href="#" class="nav-link" id="contactNav">Contact</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="donate.html" class="donate-btn desktop-donate">Donate</a>
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" class="social-link instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" class="social-link youtube" aria-label="YouTube" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Loading Screen -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+            <div class="loader-circle"></div>
+        </div>
+    </div>
+    <!-- Modal Structure -->
+    <div class="modal">
+        <button class="modal-close">&times;</button>
+        <button class="modal-nav-button modal-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav-button modal-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-content">
+            <img src="" alt="" class="modal-image">
+        </div>
+        <div class="modal-counter"></div>
+    </div>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>NEED Organization</h1>
+            <p>Natural Education for Ecological Development</p>
+        </div>
+    </section>
+
+    <section id="about" class="about-section" style="background: #fffbe6;">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>About Us
+                  <span class="about-heading-social">
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" target="_blank" aria-label="Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" target="_blank" aria-label="YouTube" rel="noopener"><i class="fab fa-youtube"></i></a>
+                  </span>
+                </h2>
+                <p>Natural Education for Ecological Development (NEED) is a Non-Government Organization, registered with Charity Commissioner Office, Yavatmal on dated 04.03.2010, Reg. No. F-13490, under Bombay Public Trust Act 1950, having registered office at Khairgaon Bhedi, Tal: Maregaon, Dist.: Yavatmal (Maharashtra).</p>
+                <p>NEED is a grassroots non-governmental organization (NGO) dedicated to empowering marginalized communities through sustainable development initiatives. Established with a focus on community development, NEED works in areas like women empowerment, youth skill development, education and livelihood support.</p>
+                <p>Key projects include the Tanabana production centre, fishing-related Jalmani project and financial literacy initiatives. With a people-centric approach, NEED emphasizes local participation, self-reliance, and holistic community growth.</p>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Education & Skill Development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-female"></i>
+                        <span>Women Empowerment</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-hands-helping"></i>
+                        <span>Community Development</span>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>Sustainable Livelihood</span>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Years of Service</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Lives Impacted</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Active Projects</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="about.jpeg" alt="NEED Organization Activities" style="background:#f7f8fa; min-height:260px; display:block; width:100%; object-fit:cover; border-radius:20px;">
+            </div>
+        </div>
+    </section>
+    <!-- END About Section -->
+
+    <section id="vision-mission" class="vision-mission-section" style="background: #e6f7ff;">
+        <div class="section-title">Our Core Values</div>
+        <div class="vision-mission-container">
+            <div class="card vision-card">
+                <div class="card-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Our Vision</h3>
+                <p>Building a society where rural communities have access to development opportunities and resources for sustainable growth.</p>
+                <div class="card-overlay"></div>
+            </div>
+            <div class="card mission-card">
+                <div class="card-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3>Our Mission</h3>
+                <p>Empower underprivileged rural communities through targeted programs that foster education, skill development, and sustainable livelihoods.</p>
+                <div class="card-overlay"></div>
+            </div>
+            <div class="card values-card">
+                <div class="card-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Our Values</h3>
+                <ul class="values-list">
+                    <li><i class="fas fa-check-circle"></i>Beneficiary Focus</li>
+                    <li><i class="fas fa-check-circle"></i>Discipline</li>
+                    <li><i class="fas fa-check-circle"></i>Ethical Behavior</li>
+                    <li><i class="fas fa-check-circle"></i>Transparency</li>
+                    <li><i class="fas fa-check-circle"></i>Democratic Functioning</li>
+                </ul>
+                <div class="card-overlay"></div>
+            </div>
+        </div>
+    </section>
+    <!-- END Our Values Section -->
+
+    <section id="education" class="education-projects">
+        <h2 class="section-title">Education Initiatives</h2>
+        <div class="project-container">
+            <!-- SETU Project -->
+            <div class="project-flex">
+                <div class="project-images">
+                    <div class="image-grid setu-image-grid">
+                        <img src="1.jpg" alt="SETU Program Activity 1">
+                        <img src="2.jpg" alt="SETU Program Activity 2">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">SETU: Bridging The Learning Gap</h3>
+                    <p class="project-subtitle">"A Child in need, is a child of NEED"</p>
+                    <ul class="achievement-list">
+                        <li>Working with 2nd to 8th grade students for Marathi language, Mathematical calculations and science skills</li>
+                        <li>Summer camp from April to May for skill development (painting, clay art, Warli art)</li>
+                        <li>Village history and ecosystem understanding</li>
+                        <li>Career guidance for pre-recruitment examination</li>
+                        <li>Free ANM training for interested girls</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Digital Literacy Project -->
+            <div class="project-flex reverse" id="digital-literacy">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="3.jpg" alt="Digital Literacy 1">
+                        <img src="4.jpg" alt="Digital Literacy 2">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Digital Literacy</h3>
+                    <ul class="achievement-list">
+                        <li>Basic computer skills have been provided to students who are not capable of paying the fees of computer class and travelling cost up to taluka place.</li>
+                        <li>Running three computer labs in remote villages and trained 45+ students for digital literacy.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Financial Literacy Project -->
+            <div id="jadui-gullak"></div>
+            <div class="project-flex">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="7.jpg" alt="Financial Literacy 1">
+                        <img src="8.jpg" alt="Financial Literacy 2">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Financial Literacy: Jadui Gullak- Mazi Bachat Mazi Bank</h3>
+                    <ul class="achievement-list">
+                        <li>476 children received Jadui Gullak (piggy banks), 100+ bank accounts opened with deposits over ₹2.25 lakh and every student make saving over 300 rupees every month.</li>
+                        <li>After successful implementation of the program in our area, it replicates at four another NGO's in Maharashtra.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="women-empowerment" class="women-empowerment">
+        <h2 class="section-title">Women Empowerment</h2>
+        <div class="project-container">
+            <!-- Tanabana Project -->
+            <div class="project-flex">
+                <div class="project-images">
+                  <div class="image-grid">
+                    <img src="t1.jpg" alt="Tanabana Project 1">
+                    <img src="t2.jpg" alt="Tanabana Project 2">
+                  </div>
+                </div>
+                <div class="project-content">
+                  <h3 class="project-title">Tanabana Project: Pillakule Dhandanet Edman</h3>
+                  <p class="project-subtitle">Respect Women's Work</p>
+                  <ul class="achievement-list">
+                      <li>Financially supported by Persistent Foundation, the program offered training in sewing machine operation, aiming to empower women with practical skills to generate income from home.</li>
+                      <li>Started in 2021 with 4 women, provide training and sewing machine to 55 women.</li>
+                      <li>By producing dohar, bedsheet, yoga mat, sanitary napkin, school bag and laptop bag from recycled jeans cloth, etc., the group make turnover of 82 lakhs and got over 21 lakh as silai prerananidhi.</li>
+                      <li>The expansion of second Tanabana unit at Maregaon, marks a significant step forward to empowering women and fostering sustainable livelihood</li>
+                  </ul>
+                </div>
+            </div>
+
+            <!-- Tu Bhetshi Navyane Project -->
+            <div class="project-flex reverse">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="23.jpg" alt="Tu Bhetshi Navyane 1">
+                        <img src="24.jpg" alt="Tu Bhetshi Navyane 2">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Tu Bhetshi Navyane</h3>
+                    <ul class="achievement-list">
+                        <li>Reached 1000+ adolescent girls in Yavatmal's tribal area</li>
+                        <li>Distribution of reusable hygiene kits to ensure sustainable menstrual health</li>
+                        <li>Regular awareness sessions and open discussions to break stigma</li>
+                        <li>Partnering with local health workers for continuous support</li>
+                        <li>Creating a supportive environment for menstrual health education</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="livelihood" class="livelihood-projects">
+        <h2 class="section-title">Livelihood Development</h2>
+        <div class="project-container">
+            <!-- Fishing Project -->
+            <div class="project-flex">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="9.jpg" alt="Fishing Project 1">
+                        <img src="10.jpg" alt="Fishing Project 2">
+                        <img src="11.jpg" alt="Fishing Project 3">
+                        <img src="12.jpg" alt="Fishing Project 4">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Fishing Business Development</h3>
+                    <ul class="achievement-list">
+                        <li>Establish a group of six youths in 21 villages, engaging 126 youth in fishing business at their native place.</li>
+                        <li>Earn 400 to 500 rupees per day, having at least 20 market days in a month.</li>
+                        <li>Economic Stability: Beneficiaries now earn between 600 and 700 rupees per day</li>
+                        <li>Skill Development: More than 126 individuals have acquired practical fishing skills</li>
+                        <li>Total Fish Caught: 19,684 kg</li>
+                        <li>Total Revenue Generated: ₹ 12,59,405</li>
+                        <li>Net Profit: ₹ 12,04,698</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mechanized Farming Project -->
+            <div class="project-flex reverse" id="atari-aujar-bank">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="16.jpg" alt="Mechanized Farming 1">
+                        <img src="18.jpg" alt="Mechanized Farming 3">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Mechanized Farming Project: Atari Aujar Bank</h3>
+                    <ul class="achievement-list">
+                        <li>Aimed to provide affordable farming equipment and help to increase farmer's production.</li>
+                        <li>Recognizing the need of farmers, Syngenta Foundation provide a Tractor and necessary equipment.</li>
+                        <li>A group of ten youth was formed to implement the project and start work of cultivation with needy farmers, keeping in mind the principle of No Loss – No Profit.</li>
+                        <li>Total area of 2000+ acres brought under mechanized cultivation.</li>
+                        <li>Livelihood of 10 youths secured.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Youth Empowerment Section -->
+    <section id="youth" class="youth-empowerment-section">
+      <h2 class="section-title">Youth Empowerment</h2>
+      <div class="project-container">
+        <!-- Sevakainchi Project -->
+        <div class="project-flex" id="sevakainchi">
+          <div class="project-images">
+            <div class="image-grid">
+              <img src="14.jpg" alt="Sevakainchi Salon Project 1">
+              <img src="15.jpg" alt="Sevakainchi Salon Project 2">
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Salon Project: Sevakainchi-Kaichi aur kaushalya se kamai Tak</h3>
+            <ul class="achievement-list">
+              <li>Provide four month's up to date salon training through experienced trainers to 50 youths in two batches.</li>
+              <li>12 youth started their own shop at native place, 14 youth are working as artisan in salon at taluka place, 6 youth got agreement with Ashram school to cut the hair of 200 students once in every two months and 5 youth are working in ultramodern salon at Pune after completing one year apprentice period and now earn 30,000 to 35,000 per month.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- NEED Sporting Club Project (moved from Community) -->
+        <div class="project-flex sporting-club">
+          <div class="project-images">
+            <div class="image-grid" style="grid-template-columns: 1fr;">
+              <div class="image-wrapper">
+                <img src="33.jpg" alt="NEED Sporting Club - Youth Training" style="height: 400px; width: 100%; object-fit: cover;">
+              </div>
+              <div class="video-wrapper" style="margin-top: 18px;">
+                <iframe class="kabaddi-video" src="https://www.youtube.com/embed/qzCR8c0UUN4?autoplay=1&mute=1&loop=1&playlist=qzCR8c0UUN4&controls=0&rel=0&vq=hd1080" title="Kabaddi Match" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen style="width:100%; max-width:600px; max-height:340px; border-radius:18px; box-shadow:0 8px 32px rgba(44,62,80,0.18); object-fit:cover; background:#000;"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">NEED Sporting Club: Khel Se Kaushalya</h3>
+            <ul class="achievement-list">
+              <li>We developed a kabaddi ground in our premises to promote physical fitness, teamwork, and discipline among rural youth.</li>
+              <li>The space has become a hub for community engagement, encouraging children and teenagers to participate in sports instead of getting involved in negative influences.</li>
+              <li>It has also helped identify local talent and boost their confidence through regular practice and local tournaments.</li>
+              <li>We search ability and talent of the player during yearly tournaments, and provide skill training to needy youth to get capable for their livelihood.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="community" class="community-projects">
+        <h2 class="section-title">Community Development</h2>
+        <div class="project-container">
+            <!-- Har Ghar Nal Se Jal Project -->
+            <div class="project-flex water-project">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <div class="image-wrapper">
+                            <img src="27.jpg" alt="Har Ghar Nal Se Jal">
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Har Ghar Nal Se Jal</h3>
+                    <ul class="achievement-list">
+                        <li>Availability of drinking water in rural areas is a dream for thousands of people after 75 years of independence.</li>
+                        <li>To fulfil the dream of such villages like Bhimsenpur and Bhutupod in Ralegaon taluka, we renovate the existing well by deepening and make sure that the water level should be maintain even in the peak summer season.</li>
+                        <li>Provide tap water connections to 80 families at doorstep and feel the joy and happiness on their face</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Tree Plantation Project (Environment) -->
+            <div class="project-flex">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <div class="video-wrapper">
+                            <video src="environment.mp4" controls poster="en1.jpeg" style="width:100%; max-height:340px; border-radius:18px; box-shadow:0 8px 32px rgba(44,62,80,0.18); object-fit:cover;"></video>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Tree Plantation Drive</h3>
+                    <ul class="achievement-list">
+                        <li>Thousands of trees planted to promote environmental conservation and awareness in the community.</li>
+                        <li>Regular drives and campaigns to encourage participation from all age groups.</li>
+                        <li>Improved green cover and biodiversity in the region.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Backyard Kitchen Gardens Project -->
+            <div class="project-flex reverse">
+                <div class="project-images">
+                    <div class="image-grid">
+                        <img src="28.jpg" alt="Kitchen Garden 1">
+                        <img src="29.jpg" alt="Kitchen Garden 2">
+                        <img src="31.jpg" alt="Kitchen Garden 4">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Backyard Kitchen Gardens</h3>
+                    <ul class="achievement-list">
+                        <li>We provide backyard kitchen gardens to undernourished women to help them grow fresh and nutritious vegetables at home.</li>
+                        <li>This initiative ensures a regular supply of essential nutrients, improving their and their families' health.</li>
+                        <li>It also promotes self-reliance and awareness about healthy eating habits.</li>
+                        <li>Distribution of vegetable seeds to 45 women in 6 village.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="support-section">
+        <h2 class="section-title">Support & Collaborations</h2>
+        <div class="support-container">
+            <div class="support-intro">
+                <p>We work in partnership with community members, local leaders and corporate CSR groups.</p>
+            </div>
+            <div class="partners-grid">
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="sevasahyog.svg" alt="Seva Sahayog" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Seva Sahayog</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="seva-vardhini-logo.jpg" alt="Seva Vardhini (NSDC)" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Seva Vardhini (NSDC)</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="NEED.png" alt="Sahyadri Lokseva Foundation" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Sahyadri Lokseva Foundation</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="sewainternational.png" alt="Sewa International" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Sewa International</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="atlascopco.svg" alt="Atlas Copco" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Atlas Copco</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="HSBC-logo.svg" alt="HSBC Foundation" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>HSBC Foundation</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="persistent-foundation-logo-service-to-society.svg" alt="Persistent Foundation" style="max-width:100px; max-height:100px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Persistent Foundation</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="syngenta.svg" alt="Syngenta India" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>Syngenta India</h3>
+                  </div>
+                </div>
+                <div class="partner-card">
+                  <div class="partner-content">
+                    <img src="birla-logo.jpg" alt="MP Birla Corporation" style="max-width:80px; max-height:80px; margin-bottom:8px; display:block; margin-left:auto; margin-right:auto;">
+                    <h3>MP Birla Corporation</h3>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal HTML -->
+    <div class="contact-modal-backdrop" id="contactModalBackdrop">
+      <div class="contact-modal" role="dialog" aria-modal="true" tabindex="-1">
+        <button class="contact-modal-close" id="contactModalClose" aria-label="Close contact info">&times;</button>
+        <div class="contact-modal-title">Contact Information</div>
+        <ul class="contact-modal-list">
+          <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-modal-text">NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</span></li>
+          <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">99217 47531, 89997 22703</span></li>
+          <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">97659 33586, 98812 74861</span></li>
+          <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-envelope"></i></span><span class="contact-modal-text">need.kolam@gmail.com</span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- Volunteer Section -->
+    <section id="volunteer" class="volunteer-section" style="background: #fffbe6; padding: 48px 0 32px 0;">
+        <div class="container" style="max-width: 600px; margin: 0 auto;">
+            <div class="contact-card" style="box-shadow: 0 4px 24px rgba(44,62,80,0.10); border-radius: 18px; background: #fff; padding: 32px 24px;">
+                <h2 style="color: #e67e22; font-size: 1.5rem; margin-bottom: 18px; text-align: center;">Become a Volunteer - Contact Us</h2>
+                <ul class="contact-modal-list" style="margin-bottom: 0;">
+                    <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-modal-text">NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</span></li>
+                    <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">99217 47531, 89997 22703</span></li>
+                    <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">97659 33586, 98812 74861</span></li>
+                    <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-envelope"></i></span><span class="contact-modal-text">need.kolam@gmail.com</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Loading animation
+        window.addEventListener('load', function() {
+            // Ensure minimum loading time of 1 second
+            setTimeout(function() {
+                const loaderWrapper = document.querySelector('.loader-wrapper');
+                loaderWrapper.classList.add('fade-out');
+                
+                // Enable scrolling after loader fades out
+                setTimeout(function() {
+                    document.body.style.overflow = 'auto';
+                    loaderWrapper.style.display = 'none';
+                }, 500);
+            }, 1000);
+        });
+
+        // Initialize AOS animation library
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Enhanced Image Modal Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for all content to load
+            setTimeout(function() {
+                initializeImageModal();
+            }, 100);
+        });
+
+        function initializeImageModal() {
+            const modal = document.querySelector('.modal');
+            const modalImage = modal.querySelector('.modal-image');
+            const modalClose = modal.querySelector('.modal-close');
+            const modalPrev = modal.querySelector('.modal-prev');
+            const modalNext = modal.querySelector('.modal-next');
+            const modalCounter = modal.querySelector('.modal-counter');
+            let currentImageIndex = 0;
+            let currentImageSet = [];
+
+            function preloadImage(src) {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = reject;
+                    img.src = src;
+                });
+            }
+
+            async function openModal(image, imageSet) {
+                currentImageSet = imageSet;
+                currentImageIndex = currentImageSet.indexOf(image);
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                try {
+                    await preloadImage(image.src);
+                    modalImage.src = image.src;
+                    modalImage.alt = image.alt;
+                    updateCounter();
+                    updateNavigationButtons();
+                } catch (error) {
+                    console.error('Error loading image:', error);
+                }
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    modalImage.src = '';
+                    modalImage.alt = '';
+                }, 300);
+            }
+
+            async function navigateImage(direction) {
+                currentImageIndex += direction;
+                if (currentImageIndex >= currentImageSet.length) currentImageIndex = 0;
+                if (currentImageIndex < 0) currentImageIndex = currentImageSet.length - 1;
+
+                const nextImage = currentImageSet[currentImageIndex];
+                modalImage.style.opacity = '0';
+                modalImage.style.transform = 'scale(0.9)';
+
+                try {
+                    await preloadImage(nextImage.src);
+                    setTimeout(() => {
+                        modalImage.src = nextImage.src;
+                        modalImage.alt = nextImage.alt;
+                        modalImage.style.opacity = '1';
+                        modalImage.style.transform = 'scale(1)';
+                        updateCounter();
+                        updateNavigationButtons();
+                    }, 300);
+                } catch (error) {
+                    console.error('Error loading image:', error);
+                }
+            }
+
+            function updateNavigationButtons() {
+                modalPrev.style.display = currentImageSet.length > 1 ? 'flex' : 'none';
+                modalNext.style.display = currentImageSet.length > 1 ? 'flex' : 'none';
+            }
+
+            function updateCounter() {
+                modalCounter.textContent = `${currentImageIndex + 1} / ${currentImageSet.length}`;
+            }
+
+            // Simple approach: Add click handlers to all content images
+            const allImages = document.querySelectorAll('img');
+            allImages.forEach(img => {
+                // Skip logos and small icons
+                if (img.classList.contains('navbar-logo') || 
+                    img.classList.contains('footer-logo') ||
+                    img.closest('.social-links') ||
+                    img.closest('.footer-social') ||
+                    img.closest('.main-partner-logo') ||
+                    img.closest('.contact-modal-icon') ||
+                    img.width < 50 || img.height < 50) {
+                    return;
+                }
+
+                // Add click handler
+                img.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const grid = this.closest('.image-grid');
+                    const imageSet = grid ? Array.from(grid.querySelectorAll('img')) : [this];
+                    
+                    console.log('Opening modal for image:', this.src);
+                    openModal(this, imageSet);
+                });
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modalPrev.addEventListener('click', () => navigateImage(-1));
+            modalNext.addEventListener('click', () => navigateImage(1));
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', function(e) {
+                if (!modal.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        closeModal();
+                        break;
+                    case 'ArrowLeft':
+                        navigateImage(-1);
+                        break;
+                    case 'ArrowRight':
+                        navigateImage(1);
+                        break;
+                }
+            });
+
+            // Touch Events for Mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            modal.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+
+            modal.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left
+                        navigateImage(1);
+                    } else {
+                        // Swipe right
+                        navigateImage(-1);
+                    }
+                }
+            }
+        }
+
+        // Partner card smooth scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.partner-link').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var targetId = card.getAttribute('data-target');
+                    var target = document.querySelector(targetId);
+                    var highlight = card.getAttribute('data-highlight');
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                    if (highlight) {
+                        var highlightEls = document.querySelectorAll(highlight);
+                        highlightEls.forEach(function(el) {
+                            el.classList.add('highlight-flash');
+                        });
+                        setTimeout(function() {
+                            highlightEls.forEach(function(el) {
+                                el.classList.remove('highlight-flash');
+                            });
+                        }, 2000);
+                    }
+                });
+            });
+        });
+
+        // In the loader fade-out setTimeout, after loaderWrapper.style.display = 'none';
+        // Add this JS:
+        setTimeout(() => {
+          const nav = document.querySelector('.navbar');
+          if (nav) {
+            nav.style.display = 'none';
+            void nav.offsetHeight;
+            nav.style.display = '';
+            nav.style.zIndex = '2147483647';
+          }
+        }, 600);
+
+        document.addEventListener('DOMContentLoaded', function() {
+          // Modal logic
+          const contactModalBackdrop = document.getElementById('contactModalBackdrop');
+          const contactModalClose = document.getElementById('contactModalClose');
+          // Find all Contact links in navbar
+          document.querySelectorAll('.nav-link').forEach(function(link) {
+            // Use stricter check: href ends with 'contact.html' or text is exactly 'Contact'
+            const linkText = link.textContent.trim().toLowerCase();
+            const linkHref = link.getAttribute('href');
+            if (linkText === 'contact' || (linkHref && linkHref.toLowerCase().includes('contact.html'))) {
+              link.addEventListener('click', function(e) {
+                e.preventDefault();
+                contactModalBackdrop.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // Animate items
+                document.querySelectorAll('.contact-modal-item').forEach(function(item) {
+                  item.style.opacity = 0;
+                  item.style.transform = 'translateY(30px)';
+                  setTimeout(function() { item.style.opacity = ''; item.style.transform = ''; }, 10);
+                });
+                console.log('Contact modal opened');
+              });
+            }
+          });
+          // Close modal
+          function closeContactModal() {
+            contactModalBackdrop.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+          contactModalClose.addEventListener('click', closeContactModal);
+          contactModalBackdrop.addEventListener('click', function(e) {
+            if (e.target === contactModalBackdrop) closeContactModal();
+          });
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contactModalBackdrop.classList.contains('active')) closeContactModal();
+          });
+        });
+
+        // Play/pause environment video on hover of Tree Plantation section
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the Tree Plantation project-flex (by heading text)
+            const projectSections = document.querySelectorAll('.project-flex');
+            projectSections.forEach(section => {
+                const title = section.querySelector('.project-title');
+                if (title && title.textContent.trim() === 'Tree Plantation Drive') {
+                    const video = section.querySelector('video');
+                    if (video) {
+                        section.addEventListener('mouseenter', () => {
+                            video.play();
+                        });
+                        section.addEventListener('mouseleave', () => {
+                            video.pause();
+                        });
+                    }
+                }
+            });
+        });
+
+        // Responsive Navbar Toggle for index.html
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            let isMenuOpen = false;
+            if (navbarToggle && navbarMenu) {
+                navbarToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isMenuOpen = !isMenuOpen;
+                    navbarMenu.classList.toggle('active');
+                    navbarToggle.innerHTML = isMenuOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+                });
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (isMenuOpen && !navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
+                        isMenuOpen = false;
+                        navbarMenu.classList.remove('active');
+                        navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = '';
+                    }
+                });
+                // Prevent menu close when clicking inside menu
+                navbarMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+                // Close menu on resize if desktop
+                window.addEventListener('resize', function() {
+                    if (window.innerWidth > 800 && isMenuOpen) {
+                        isMenuOpen = false;
+                        navbarMenu.classList.remove('active');
+                        navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-row-flex">
+              <div class="footer-links-section footer-quick-links">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                  <li class="footer-link"><a href="index.html">Home</a></li>
+                  <li class="footer-link"><a href="index.html#about">About Us</a></li>
+                  <li class="footer-link"><a href="projects.html">Projects</a></li>
+                  <li class="footer-link"><a href="team.html">Our Team</a></li>
+                  <li class="footer-link"><a href="gallery.html">Gallery</a></li>
+                  <li class="footer-link"><a href="reports.html">Reports</a></li>
+                </ul>
+              </div>
+              <div class="footer-links-section footer-projects">
+                <h4 class="footer-title">Our Projects</h4>
+                <ul class="footer-links">
+                  <li class="footer-link"><a href="index.html#education">Education</a></li>
+                  <li class="footer-link"><a href="index.html#women-empowerment">Healthcare</a></li>
+                  <li class="footer-link"><a href="index.html#community">Environment</a></li>
+                  <li class="footer-link"><a href="index.html#women-empowerment">Women Empowerment</a></li>
+                  <li class="footer-link"><a href="index.html#community">Rural Development</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="footer-links-section footer-contact">
+              <h4 class="footer-title">Contact Info</h4>
+              <ul class="footer-links">
+                <li class="footer-link"><i class="fas fa-map-marker-alt"></i> NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</li>
+                <li class="footer-link"><i class="fas fa-phone"></i> 99217 47531, 89997 22703<br>97659 33586, 98812 74861</li>
+                <li class="footer-link"><i class="fas fa-envelope"></i> need.kolam@gmail.com</li>
+                <li class="footer-link"><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2024 NEED Organization. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+</body>
+</html> 

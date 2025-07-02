@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate - NEED Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #ffffff;
+        }
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1001;
+        }
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .brand-name {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+        .brand-tagline {
+            color: #666;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .donate-mobile {
+            display: none;
+        }
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .nav-list {
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .social-links {
+            display: flex !important;
+            gap: 12px;
+            margin-left: auto;
+        }
+        .social-link {
+            color: #2c3e50;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .social-link.instagram {
+            color: #E4405F;
+        }
+        .social-link.youtube {
+            color: #FF0000;
+        }
+        .social-link:hover, .social-link:focus {
+            background: #e67e22;
+            color: #fff;
+        }
+        .social-link.instagram:hover, .social-link.instagram:focus {
+            background: #E4405F;
+            color: #fff;
+        }
+        .social-link.youtube:hover, .social-link.youtube:focus {
+            background: #FF0000;
+            color: #fff;
+        }
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1001;
+        }
+        @media (max-width: 768px) {
+            .navbar-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 180px;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 24px rgba(44,62,80,0.10);
+                padding: 12px 0 12px 12px;
+                gap: 0;
+                display: none;
+            }
+            .navbar-menu.active { display: flex; }
+            .nav-list { flex-direction: column; gap: 6px; width: 100%; }
+            .social-links { margin-left: 0; margin-top: 12px; }
+            .navbar-toggle { display: block; }
+        }
+        @media (min-width: 769px) {
+            .navbar-menu .donate-btn {
+                display: inline-block !important;
+            }
+        }
+        @media (max-width: 400px), (max-width: 360px) {
+            .navbar-container {
+                padding: 0 4px;
+                height: 48px;
+            }
+            .navbar-logo {
+                width: 36px;
+                height: 36px;
+            }
+            .brand-name {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+            .brand-tagline {
+                display: none !important;
+            }
+            .brand-tagline {
+                font-size: 0.52rem;
+                letter-spacing: 0.2px;
+            }
+            .navbar {
+                height: 48px;
+            }
+        }
+        .donate-container {
+            max-width: 520px;
+            margin: 120px auto 40px auto;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px rgba(230,126,34,0.10);
+            padding: 44px 32px 36px 32px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(2.5px);
+            -webkit-backdrop-filter: blur(2.5px);
+            opacity: 0.98;
+        }
+        .donate-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        .donate-message {
+            font-size: 1.13rem;
+            color: #444;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+        .donate-list {
+            text-align: left;
+            margin: 0 0 24px 0;
+            padding: 0 0 0 18px;
+            color: #2c3e50;
+            font-size: 1.08rem;
+        }
+        .donate-list li {
+            margin-bottom: 10px;
+            list-style: disc;
+        }
+        .account-details {
+            background: #fffbe6;
+            border: 1.5px solid #e67e22;
+            border-radius: 14px;
+            padding: 22px 18px 18px 18px;
+            margin-bottom: 24px;
+            text-align: left;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 12px rgba(230,126,34,0.06);
+        }
+        .account-details strong {
+            color: #e67e22;
+        }
+        .copy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 7px 18px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .copy-btn:hover {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            transform: scale(1.04);
+        }
+        .thankyou {
+            color: #27ae60;
+            font-size: 1.1rem;
+            margin-top: 18px;
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .donate-container {
+                padding: 18px 4vw 18px 4vw;
+            }
+        }
+        .footer {
+            background: #fff;
+            color: #222;
+            padding: 40px 0;
+            border-top: 1.5px solid #ececec;
+            box-shadow: 0 -2px 16px rgba(44,62,80,0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .footer-info, .footer-links-section {
+            flex: 1;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            background: #fff;
+        }
+        .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .footer-brand-text h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .footer-brand-text p {
+            color: #888;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        .footer-about {
+            color: #555;
+            margin-top: 10px;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+        .footer-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background: #e67e22;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        .footer-link a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link a:hover {
+            color: #e67e22;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .footer-social-link {
+            width: 35px;
+            height: 35px;
+            background: #f7f7f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .footer-social-link:hover {
+            background: #e67e22;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ececec;
+            padding-top: 20px;
+            color: #888;
+            font-size: 0.97rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-brand {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 992px) {
+            .footer-grid {
+                display: block;
+            }
+            .footer-row-flex {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0;
+                width: 100%;
+            }
+            .footer-quick-links {
+                flex: 1;
+                text-align: left;
+            }
+            .footer-projects {
+                flex: 1;
+                text-align: right;
+            }
+            .footer-contact {
+                margin-top: 24px;
+                width: 100%;
+                text-align: left;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-row-flex {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-quick-links {
+                text-align: left;
+                margin-left: 20px;
+            }
+            .footer-projects {
+                text-align: right;
+                margin-right: 20px;
+            }
+            .footer-contact {
+                text-align: center;
+                grid-column: 1 / -1;
+                margin-top: 20px;
+            }
+        }
+        @media (max-width: 600px) {
+            .footer-row-flex {
+                flex-direction: column;
+                text-align: left;
+            }
+            .footer-projects {
+                text-align: left;
+                margin-top: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.jpeg" alt="NEED Logo" class="navbar-logo">
+                <div class="brand-text">
+                    <span class="brand-name">NEED</span>
+                    <span class="brand-tagline">Natural Education for Ecological Development</span>
+                </div>
+            </a>
+            <div class="navbar-actions">
+                <a href="donate.html" class="donate-btn donate-mobile">Donate</a>
+                <button class="navbar-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="navbar-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#vision-mission" class="nav-link">Our Values</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="media.html" class="nav-link">Media</a></li>
+                    <li><a href="#" class="nav-link" id="contactNav">Contact</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="donate.html" class="donate-btn desktop-donate">Donate</a>
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" class="social-link instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" class="social-link youtube" aria-label="YouTube" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="donate-container">
+        <div class="account-details" id="accountDetails">
+            <div><strong>Name:</strong> Natural Education for Ecological Development Institute</div>
+            <div><strong>Account Number:</strong> 32436898228</div>
+            <div><strong>Bank:</strong> State Bank of India, Maregaon Branch</div>
+            <div><strong>IFSC Code:</strong> SBIN0011150</div>
+        </div>
+        <button class="copy-btn" onclick="copyAccountDetails()"><i class="fas fa-copy"></i> Copy Account Details</button>
+        <div class="thankyou" id="thankyouMsg">Account details copied!</div>
+        <div class="donate-title"><i class="fas fa-hands-helping"></i> Make a Donation</div>
+        <form action="https://formsubmit.co/rajvkbokade@gmail.com" method="POST" style="margin-bottom: 18px;">
+            <label for="donorName" style="display:block; font-weight:500; color:#2c3e50; margin-bottom:6px;">Your Name</label>
+            <input type="text" id="donorName" name="donorName" style="width:100%; padding:10px 12px; border:1.2px solid #e0e0e0; border-radius:8px; font-size:1rem; margin-bottom:10px;">
+            <label for="pan" style="display:block; font-weight:500; color:#2c3e50; margin-bottom:6px;">PAN Number</label>
+            <input type="text" id="pan" name="pan" maxlength="10" style="width:100%; padding:10px 12px; border:1.2px solid #e0e0e0; border-radius:8px; font-size:1rem; margin-bottom:10px;">
+            <label for="amount" style="display:block; font-weight:500; color:#2c3e50; margin-bottom:6px;">Donation Amount</label>
+            <input type="number" id="amount" name="amount" maxlength="10" style="width:100%; padding:10px 12px; border:1.2px solid #e0e0e0; border-radius:8px; font-size:1rem; margin-bottom:10px;">
+
+            <button type="submit" class="copy-btn" style="width:100%; margin-top:10px;">Submit</button>
+        </form>
+        <div id="donationDetails">
+            <ul class="donate-list">
+                <li>Join Us in Making a Difference</li>
+                <li>Together, we can build a future where tribal communities live with dignity, security, and opportunity.</li>
+            </ul>
+            <div class="donate-message">
+                Your support empowers our mission and helps us reach more lives. You can donate directly to our account:
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-row-flex">
+                    <div class="footer-links-section footer-quick-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html">Home</a></li>
+                            <li class="footer-link"><a href="index.html#about">About Us</a></li>
+                            <li class="footer-link"><a href="projects.html">Projects</a></li>
+                            <li class="footer-link"><a href="team.html">Our Team</a></li>
+                            <li class="footer-link"><a href="gallery.html">Gallery</a></li>
+                            <li class="footer-link"><a href="reports.html">Reports</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-section footer-projects">
+                        <h4 class="footer-title">Our Projects</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html#education">Education</a></li>
+                            <li class="footer-link"><a href="index.html#women-empowerment">Healthcare</a></li>
+                            <li class="footer-link"><a href="index.html#community">Environment</a></li>
+                            <li class="footer-link"><a href="index.html#women-empowerment">Women Empowerment</a></li>
+                            <li class="footer-link"><a href="index.html#community">Rural Development</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-links-section footer-contact">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><i class="fas fa-map-marker-alt"></i> NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</li>
+                        <li class="footer-link"><i class="fas fa-phone"></i> 99217 47531, 89997 22703<br>97659 33586, 98812 74861</li>
+                        <li class="footer-link"><i class="fas fa-envelope"></i> need.kolam@gmail.com</li>
+                        <li class="footer-link"><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NEED Organization. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function copyAccountDetails() {
+            const details = `Name: Natural Education for Ecological Development Institute\nAccount Number: 32436898228\nBank: State Bank of India, Maregaon Branch\nIFSC Code: SBIN0011150`;
+            navigator.clipboard.writeText(details).then(function() {
+                document.getElementById('thankyouMsg').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('thankyouMsg').style.display = 'none';
+                }, 2000);
+            });
+        }
+
+        // Navbar menu toggle logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            let isMenuOpen = false;
+
+            // Handle scroll event for navbar shadow
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Toggle menu function
+            function toggleMenu(event) {
+                event.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                navbarMenu.classList.toggle('active');
+                navbarToggle.innerHTML = isMenuOpen ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+            }
+
+            // Close menu function
+            function closeMenu() {
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    navbarMenu.classList.remove('active');
+                    navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Event Listeners
+            if (navbarToggle) {
+                navbarToggle.addEventListener('click', toggleMenu);
+            }
+            window.addEventListener('resize', closeMenu);
+            document.addEventListener('click', function(e) {
+                if (isMenuOpen && !navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

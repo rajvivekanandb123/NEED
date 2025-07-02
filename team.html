@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - NEED Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f8fafc 0%, #fbeee6 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-name {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .brand-tagline {
+            color: #666;
+            font-size: 0.7rem;
+            transition: color 0.3s ease;
+            line-height: 1;
+        }
+
+        .navbar-actions {
+            display: none;
+        }
+        .donate-mobile {
+            display: none;
+        }
+        .desktop-donate {
+            display: inline-block;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-left: auto;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-left: auto;
+        }
+
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex !important;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .social-link {
+            color: #2c3e50;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f7;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .social-link.instagram {
+            color: #E4405F;
+        }
+        .social-link.youtube {
+            color: #FF0000;
+        }
+        .social-link:hover, .social-link:focus {
+            background: #e67e22;
+            color: #fff;
+        }
+        .social-link.instagram:hover, .social-link.instagram:focus {
+            background: #E4405F;
+            color: #fff;
+        }
+        .social-link.youtube:hover, .social-link.youtube:focus {
+            background: #FF0000;
+            color: #fff;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-actions {
+                display: flex !important;
+                align-items: center;
+                gap: 12px;
+            }
+            .donate-mobile {
+                display: inline-block !important;
+                margin-left: 0;
+                padding: 8px 18px;
+                font-size: 0.98rem;
+                border-radius: 20px;
+                box-shadow: 0 2px 12px rgba(230,126,34,0.13);
+                background: linear-gradient(90deg, #e67e22, #f39c12);
+                color: #fff !important;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.1px;
+            }
+            .navbar-toggle {
+                display: block !important;
+            }
+            .navbar-menu {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #fff;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 180px;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 8px 24px rgba(44,62,80,0.10);
+                padding: 12px 0 12px 12px;
+                gap: 0;
+                display: none;
+            }
+            .navbar-menu.active { display: flex; }
+            .nav-list { flex-direction: column; gap: 6px; width: 100%; }
+            .social-links { margin-left: 0; margin-top: 12px; }
+            .desktop-donate {
+                display: inline-block !important;
+                margin: 0 0 0 12px !important;
+                width: auto !important;
+                text-align: center;
+                vertical-align: middle;
+                margin-top: -2px !important;
+            }
+            .donate-btn {
+                margin: 0 0 0 12px !important;
+                width: auto !important;
+                padding: 8px 18px;
+                vertical-align: middle;
+                margin-top: -2px !important;
+            }
+        }
+        @media (max-width: 400px), (max-width: 360px) {
+            .navbar-container {
+                padding: 0 4px;
+                height: 48px;
+            }
+            .navbar-logo {
+                width: 36px;
+                height: 36px;
+            }
+            .brand-name {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+            .brand-tagline {
+                display: none !important;
+            }
+            .brand-tagline {
+                font-size: 0.52rem;
+                letter-spacing: 0.2px;
+            }
+            .navbar {
+                height: 48px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .navbar-actions {
+                display: none;
+            }
+            .navbar-menu .donate-btn {
+                display: inline-block !important;
+            }
+            .donate-mobile {
+                display: none !important;
+            }
+            .desktop-donate {
+                display: inline-block !important;
+            }
+        }
+
+        /* Team Section Styles */
+        .team-section {
+            padding: 120px 0 80px;
+            background: transparent;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .title-small {
+            font-size: 1rem;
+            color: #e67e22;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .title-large {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 20px 0;
+        }
+
+        .team-card {
+            position: relative;
+            background: linear-gradient(120deg, #fffbe6 0%, #ffe5d0 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 4px 32px rgba(230,126,34,0.08), 0 1.5px 0 #f9d7b5;
+            border: 1.5px solid #f7c59f;
+        }
+
+        .team-card:hover {
+            box-shadow: 0 8px 40px rgba(230,126,34,0.18), 0 1.5px 0 #f9d7b5;
+            background: linear-gradient(120deg, #fffbe6 0%, #ffe5d0 80%, #fff6e0 100%);
+            transform: translateY(-8px) scale(1.03);
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e67e22;
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-header {
+            position: relative;
+            padding: 40px 30px;
+            background: #fff7e6;
+            text-align: left;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .role-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background: linear-gradient(90deg, #f7c59f 0%, #e67e22 100%);
+            color: #fff;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .team-name {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .team-role {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .team-body {
+            padding: 30px;
+            background: #ffffff;
+            border: 1px solid #eee;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .info-text {
+            font-size: 1rem;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .experience-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 8px;
+        }
+
+        .experience-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .container {
+                padding: 0 40px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .team-section {
+                padding: 100px 0 60px;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .title-large {
+                font-size: 2.2rem;
+            }
+
+            .team-grid {
+                gap: 30px;
+            }
+
+            .team-header {
+                padding: 30px 25px;
+            }
+
+            .team-body {
+                padding: 25px;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .title-large {
+                font-size: 1.8rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        /* Animation Styles */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .team-card {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .team-card:nth-child(1) { animation-delay: 0.1s; }
+        .team-card:nth-child(2) { animation-delay: 0.2s; }
+        .team-card:nth-child(3) { animation-delay: 0.3s; }
+        .team-card:nth-child(4) { animation-delay: 0.4s; }
+        .team-card:nth-child(5) { animation-delay: 0.5s; }
+        .team-card:nth-child(6) { animation-delay: 0.6s; }
+        .team-card:nth-child(7) { animation-delay: 0.7s; }
+        .team-card:nth-child(8) { animation-delay: 0.8s; }
+        .team-card:nth-child(9) { animation-delay: 0.9s; }
+
+        .donate-btn {
+            display: inline-block;
+            margin-left: 32px;
+            padding: 9px 26px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            color: #fff !important;
+            font-size: 1.01rem;
+            font-weight: 700;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(230,126,34,0.13);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: none;
+            outline: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+        .donate-btn:hover, .donate-btn:focus {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(230,126,34,0.18);
+        }
+        @media (max-width: 768px) {
+            .donate-btn {
+                margin: 12px 0 0 0;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+        }
+
+        /* Footer styles from index.html */
+        .footer {
+            background: #fff;
+            color: #222;
+            padding: 40px 0;
+            border-top: 1.5px solid #ececec;
+            box-shadow: 0 -2px 16px rgba(44,62,80,0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .footer-links-section {
+            flex: 1;
+        }
+        .footer-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background: #e67e22;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        .footer-link a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link a:hover {
+            color: #e67e22;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ececec;
+            padding-top: 20px;
+            color: #888;
+            font-size: 0.97rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                display: block;
+            }
+            .footer-row-flex {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0;
+                width: 100%;
+            }
+            .footer-quick-links {
+                flex: 1;
+                text-align: left;
+            }
+            .footer-projects {
+                flex: 1;
+                text-align: right;
+            }
+            .footer-contact {
+                margin-top: 24px;
+                width: 100%;
+                text-align: left;
+            }
+        }
+        @media (max-width: 600px) {
+            .footer-row-flex {
+                flex-direction: column;
+                text-align: left;
+            }
+            .footer-projects {
+                text-align: left;
+                margin-top: 18px;
+            }
+        }
+
+        /* Hide navbar Contact link on team page */
+        .nav-link#contactNav { display: none !important; }
+
+        .contact-bottom-box {
+            max-width: 420px;
+            margin: 60px auto 40px auto;
+            background: linear-gradient(120deg, #fffbe6 0%, #ffe5d0 100%);
+            border-radius: 22px;
+            box-shadow: 0 4px 32px rgba(230,126,34,0.13);
+            padding: 38px 32px 30px 32px;
+            border: 2px solid #f7c59f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 0.7s cubic-bezier(.4,0,.2,1);
+        }
+        .contact-bottom-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #e67e22;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .contact-bottom-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+        .contact-bottom-list li {
+            font-size: 1.08rem;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+        .contact-bottom-list i {
+            color: #e67e22;
+            font-size: 1.2rem;
+            margin-top: 3px;
+            min-width: 20px;
+        }
+        @media (max-width: 600px) {
+            .contact-bottom-box {
+                padding: 24px 10px 18px 10px;
+                max-width: 98vw;
+            }
+            .contact-bottom-title {
+                font-size: 1.1rem;
+            }
+            .contact-bottom-list li {
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.jpeg" alt="NEED Logo" class="navbar-logo">
+                <div class="brand-text">
+                    <span class="brand-name">NEED</span>
+                    <span class="brand-tagline">Natural Education for Ecological Development</span>
+                </div>
+            </a>
+            <div class="navbar-actions">
+                <a href="donate.html" class="donate-btn donate-mobile">Donate</a>
+                <button class="navbar-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="navbar-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#vision-mission" class="nav-link">Our Values</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="media.html" class="nav-link">Media</a></li>
+                    <li><a href="#" class="nav-link" id="contactNav">Contact</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="donate.html" class="donate-btn desktop-donate">Donate</a>
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" class="social-link instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" class="social-link youtube" aria-label="YouTube" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="team-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <span class="title-small">Meet Our Team</span>
+                <h1 class="title-large">The People Behind NEED</h1>
+            </div>
+            <div class="team-grid">
+                <!-- Gangadhar Atram -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Community Development</span>
+                        <h2 class="team-name">Gangadhar Atram</h2>
+                        <p class="team-role">President, NEED</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BA, MSW, DNYS</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <ul class="experience-list">
+                                    <li class="experience-item">3 Years GSMT</li>
+                                    <li class="experience-item">10 Years DILASA NGO</li>
+                                    <li class="experience-item">2 Years Mumbai University</li>
+                                    <li class="experience-item">2 Years TRTI Pune</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Sunil Govardipe -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Education & Livelihood</span>
+                        <h2 class="team-name">Sunil Govardipe</h2>
+                        <p class="team-role">Secretary, NEED</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BA</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <ul class="experience-list">
+                                    <li class="experience-item">5 years GSMT (Livelihood)</li>
+                                    <li class="experience-item">Pratham Foundation 3 Years (Education)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mahebub Shaik -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Finance</span>
+                        <h2 class="team-name">Mahebub Shaik</h2>
+                        <p class="team-role">Financial Head</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BA</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <ul class="experience-list">
+                                    <li class="experience-item">15 Years Voltas Company</li>
+                                    <li class="experience-item">5 Years NEED</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sanjay Ghodam -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Agriculture & Education</span>
+                        <h2 class="team-name">Sanjay Ghodam</h2>
+                        <p class="team-role">Project Coordinator</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">Diploma in Agriculture</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <ul class="experience-list">
+                                    <li class="experience-item">Pratham Foundation 3 Years (Education)</li>
+                                    <li class="experience-item">10 Years NEED Work</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Abhijit Ambade -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Education</span>
+                        <h2 class="team-name">Abhijit Ambade</h2>
+                        <p class="team-role">Project Coordinator</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">Diploma in Agriculture, BSC (Agri.)</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <div class="info-text">3 Years NEED Work</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Rajani Atram -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Tanabana</span>
+                        <h2 class="team-name">Rajani Atram</h2>
+                        <p class="team-role">Project Head</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BA B.Ed., MA (Marathi & Sociology), Dress Designing</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <ul class="experience-list">
+                                    <li class="experience-item">3 Years School Teaching</li>
+                                    <li class="experience-item">5 Years NEED Work</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Monali Govardipe -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Tanabana</span>
+                        <h2 class="team-name">Monali Govardipe</h2>
+                        <p class="team-role">Project Head</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BA, MA, Dress Designing</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <div class="info-text">7 Years Work in NEED</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Kamlakar Survase -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Project Management</span>
+                        <h2 class="team-name">Kamlakar Survase</h2>
+                        <p class="team-role">Project Coordinator</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BSW, MSW</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <div class="info-text">2 Years in NEED</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cheeranjivi Betwar -->
+                <div class="team-card" data-aos="fade-up">
+                    <div class="team-header">
+                        <span class="role-tag">Finance</span>
+                        <h2 class="team-name">Cheeranjivi Betwar</h2>
+                        <p class="team-role">Accountant</p>
+                    </div>
+                    <div class="team-body">
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-label">Education</span>
+                                <div class="info-text">BCom & Tally</div>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-label">Experience</span>
+                                <div class="info-text">3 Years CA Work</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Box at Bottom -->
+    <div class="contact-bottom-box" data-aos="fade-up">
+        <div class="contact-bottom-title">Contact Information</div>
+        <ul class="contact-bottom-list">
+            <li><i class="fas fa-map-marker-alt"></i> NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</li>
+            <li><i class="fas fa-phone"></i> 99217 47531, 89997 22703</li>
+            <li><i class="fas fa-phone"></i> 97659 33586, 98812 74861</li>
+            <li><i class="fas fa-envelope"></i> need.kolam@gmail.com</li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal logic
+            const contactModalBackdrop = document.getElementById('contactModalBackdrop');
+            const contactModalClose = document.getElementById('contactModalClose');
+            // Find all Contact links in navbar
+            document.querySelectorAll('.nav-link').forEach(function(link) {
+                const linkText = link.textContent.trim().toLowerCase();
+                const linkHref = link.getAttribute('href');
+                if (linkText === 'contact' || (linkHref && linkHref.toLowerCase().includes('contact'))) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        contactModalBackdrop.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        // Animate items
+                        document.querySelectorAll('.contact-modal-item').forEach(function(item) {
+                            item.style.opacity = 0;
+                            item.style.transform = 'translateY(30px)';
+                            setTimeout(function() { item.style.opacity = ''; item.style.transform = ''; }, 10);
+                        });
+                    });
+                }
+            });
+            // Close modal
+            function closeContactModal() {
+                contactModalBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            contactModalClose.addEventListener('click', closeContactModal);
+            contactModalBackdrop.addEventListener('click', function(e) {
+                if (e.target === contactModalBackdrop) closeContactModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && contactModalBackdrop.classList.contains('active')) closeContactModal();
+            });
+        });
+
+        // Navbar menu toggle logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            let isMenuOpen = false;
+
+            // Handle scroll event for navbar shadow
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Toggle menu function
+            function toggleMenu(event) {
+                event.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                navbarMenu.classList.toggle('active');
+                navbarToggle.innerHTML = isMenuOpen ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+            }
+
+            // Close menu function
+            function closeMenu() {
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    navbarMenu.classList.remove('active');
+                    navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Event Listeners
+            if (navbarToggle) {
+                navbarToggle.addEventListener('click', toggleMenu);
+            }
+            window.addEventListener('resize', closeMenu);
+            document.addEventListener('click', function(e) {
+                if (isMenuOpen && !navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

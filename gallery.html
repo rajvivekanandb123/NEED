@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - NEED Organization</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: #ffffff;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 10px 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            position: relative;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            transition: transform 0.3s ease;
+            object-fit: cover;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-name {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .brand-tagline {
+            color: #666;
+            font-size: 0.7rem;
+            line-height: 1;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .social-links {
+            display: flex !important;
+            gap: 12px;
+            margin-left: auto;
+        }
+
+        .social-link {
+            color: #2c3e50;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f7;
+            font-size: 1.1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .social-link.instagram {
+            color: #E4405F;
+        }
+        .social-link.youtube {
+            color: #FF0000;
+        }
+        .social-link:hover, .social-link:focus {
+            background: #e67e22;
+            color: #fff;
+        }
+        .social-link.instagram:hover, .social-link.instagram:focus {
+            background: #E4405F;
+            color: #fff;
+        }
+        .social-link.youtube:hover, .social-link.youtube:focus {
+            background: #FF0000;
+            color: #fff;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #2c3e50;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px 20px;
+                transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+            }
+            .navbar-menu.active {
+                right: 0;
+                opacity: 1;
+            }
+            .nav-list { flex-direction: column; gap: 6px; width: 100%; }
+            .social-links { margin-left: 0; margin-top: 12px; }
+            .navbar-toggle { display: block; }
+        }
+
+        @media (max-width: 400px), (max-width: 360px) {
+            .navbar-container {
+                padding: 0 4px;
+                height: 48px;
+            }
+            .navbar-logo {
+                width: 36px;
+                height: 36px;
+            }
+            .brand-name {
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+            }
+            .brand-tagline {
+                display: none !important;
+            }
+            .brand-tagline {
+                font-size: 0.52rem;
+                letter-spacing: 0.2px;
+            }
+            .navbar {
+                height: 48px;
+            }
+        }
+
+        /* Gallery Hero Section */
+        .hero-section {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('6.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border: none;
+            background: none;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #e67e22;
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-category {
+            color: #e67e22;
+            font-size: 0.9rem;
+            transform: translateY(20px);
+            transition: transform 0.3s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-title,
+        .gallery-item:hover .gallery-category {
+            transform: translateY(0);
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .gallery-filters {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Contact Modal Styles */
+        .contact-modal-backdrop {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(30,30,40,0.25);
+            z-index: 2147483647;
+            display: none; align-items: center; justify-content: center;
+            transition: background 0.4s cubic-bezier(.4,0,.2,1);
+        }
+        .contact-modal-backdrop.active { display: flex; }
+        .contact-modal {
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 8px 40px rgba(44,62,80,0.18);
+            border-radius: 24px;
+            padding: 40px 32px 32px 32px;
+            max-width: 370px;
+            width: 90vw;
+            position: relative;
+            animation: contactModalIn 0.7s cubic-bezier(.4,0,.2,1);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        @keyframes contactModalIn {
+            0% { opacity: 0; transform: translateY(60px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .contact-modal-close {
+            position: absolute; top: 18px; right: 18px;
+            background: rgba(230,126,34,0.08);
+            border: none; border-radius: 50%; width: 38px; height: 38px;
+            font-size: 1.5rem; color: #e67e22; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+            z-index: 2;
+        }
+        .contact-modal-close:hover { background: #e67e22; color: #fff; }
+        .contact-modal-title {
+            font-size: 1.3rem; font-weight: 700; color: #2c3e50; margin-bottom: 18px; text-align: center;
+            letter-spacing: 1px;
+        }
+        .contact-modal-list {
+            list-style: none; padding: 0; margin: 0; width: 100%;
+        }
+        .contact-modal-item {
+            display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
+            opacity: 0; transform: translateY(30px);
+            animation: contactModalItemIn 0.7s cubic-bezier(.4,0,.2,1) forwards;
+        }
+        .contact-modal-item:nth-child(1) { animation-delay: 0.15s; }
+        .contact-modal-item:nth-child(2) { animation-delay: 0.3s; }
+        .contact-modal-item:nth-child(3) { animation-delay: 0.45s; }
+        .contact-modal-item:nth-child(4) { animation-delay: 0.6s; }
+        .contact-modal-item:nth-child(5) { animation-delay: 0.75s; }
+        @keyframes contactModalItemIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .contact-modal-icon {
+            width: 36px; height: 36px; border-radius: 50%; background: #ffe0b2;
+            color: #e67e22; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-modal-text { color: #2c3e50; font-size: 1rem; line-height: 1.6; }
+        @media (max-width: 500px) {
+            .contact-modal { padding: 22px 6vw 18px 6vw; }
+            .contact-modal-title { font-size: 1.1rem; }
+        }
+
+        .footer {
+            background: #fff;
+            color: #222;
+            padding: 40px 0;
+            border-top: 1.5px solid #ececec;
+            box-shadow: 0 -2px 16px rgba(44,62,80,0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            align-items: flex-start;
+        }
+        .footer-info, .footer-links-section {
+            flex: 1;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #e67e22;
+            background: #fff;
+        }
+        .footer-brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .footer-brand-text h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .footer-brand-text p {
+            color: #888;
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+        .footer-about {
+            color: #555;
+            margin-top: 10px;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+        .footer-title {
+            color: #2c3e50;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 30px;
+            height: 2px;
+            background: #e67e22;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-link {
+            margin-bottom: 10px;
+        }
+        .footer-link a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link a:hover {
+            color: #e67e22;
+        }
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .footer-social-link {
+            width: 35px;
+            height: 35px;
+            background: #f7f7f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+        .footer-social-link:hover {
+            background: #e67e22;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            border-top: 1px solid #ececec;
+            padding-top: 20px;
+            color: #888;
+            font-size: 0.97rem;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-brand {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 992px) {
+            .footer-grid {
+                display: block;
+            }
+            .footer-row-flex {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 0;
+                width: 100%;
+            }
+            .footer-quick-links {
+                flex: 1;
+                text-align: left;
+            }
+            .footer-projects {
+                flex: 1;
+                text-align: right;
+            }
+            .footer-contact {
+                margin-top: 24px;
+                width: 100%;
+                text-align: left;
+            }
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-row-flex {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+            .footer-quick-links {
+                text-align: left;
+                margin-left: 20px;
+            }
+            .footer-projects {
+                text-align: right;
+                margin-right: 20px;
+            }
+            .footer-contact {
+                text-align: center;
+                grid-column: 1 / -1;
+                margin-top: 20px;
+            }
+        }
+        @media (max-width: 600px) {
+            .footer-row-flex {
+                flex-direction: column;
+                text-align: left;
+            }
+            .footer-projects {
+                text-align: left;
+                margin-top: 18px;
+            }
+        }
+        .donate-btn {
+            display: inline-block;
+            margin-left: 32px;
+            padding: 6px 22px;
+            background: linear-gradient(90deg, #e67e22, #f39c12);
+            color: #fff !important;
+            font-size: 1.01rem;
+            font-weight: 700;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(230,126,34,0.13);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: none;
+            outline: none;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+        .donate-btn:hover, .donate-btn:focus {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(230,126,34,0.18);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.jpeg" alt="NEED Logo" class="navbar-logo">
+                <div class="brand-text">
+                    <span class="brand-name">NEED</span>
+                    <span class="brand-tagline">Natural Education for Ecological Development</span>
+                </div>
+            </a>
+            <div class="navbar-actions">
+                <a href="donate.html" class="donate-btn donate-mobile">Donate</a>
+                <button class="navbar-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="navbar-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#vision-mission" class="nav-link">Our Values</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="team.html" class="nav-link">Team</a></li>
+                    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="media.html" class="nav-link">Media</a></li>
+                    <li><a href="#" class="nav-link" id="contactNav">Contact</a></li>
+                </ul>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" class="social-link instagram" aria-label="Instagram" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" class="social-link youtube" aria-label="YouTube" target="_blank" rel="noopener">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content" data-aos="fade-up">
+            <span class="hero-subtitle">Our Gallery</span>
+            <h1 class="hero-title">Gallery
+                <span class="gallery-heading-social">
+                    <a href="https://www.instagram.com/need.kolam?igsh=MTMzMGtrOW9rb2hzNQ==" target="_blank" aria-label="Instagram" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@needkolam5076/featured" target="_blank" aria-label="YouTube" rel="noopener"><i class="fab fa-youtube"></i></a>
+                </span>
+            </h1>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-filters" data-aos="fade-up">
+                <!-- Gallery filters removed for a simple all-images grid -->
+            </div>
+
+            <div class="gallery-grid">
+                <!-- All images from the folder, each with a descriptive overlay -->
+                <div class="gallery-item" data-aos="fade-up"><img src="1.jpg" alt="SETU Program Activity 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">SETU Program Activity 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="2.jpg" alt="SETU Program Activity 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">SETU Program Activity 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="3.jpg" alt="Digital Literacy 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Digital Literacy 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="4.jpg" alt="Digital Literacy 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Digital Literacy 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="5.jpg" alt="Digital Literacy 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Digital Literacy 3</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="6.jpg" alt="Hero Background" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Gullak Program</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="7.jpg" alt="Financial Literacy 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Financial Literacy 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="8.jpg" alt="Financial Literacy 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Financial Literacy 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="9.jpg" alt="Fishing Project 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Fishing Project 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="10.jpg" alt="Fishing Project 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Fishing Project 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="11.jpg" alt="Fishing Project 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Fishing Project 3</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="12.jpg" alt="Tree Plantation Drive" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Fishing Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="14.jpg" alt="Community Meeting" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Seva Sahayog Meeting</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="15.jpg" alt="Youth Training" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kaichi Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="16.jpg" alt="Sustainable Agriculture" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Sustainable Agriculture</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="17.jpg" alt="Women's Group" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Atari Aujar Bank</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="18.jpg" alt="Rural Development" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Rural Development</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="19.jpg" alt="Environmental Conservation" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Environmental Conservation</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="20.jpg" alt="Project 20" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="21.jpg" alt="Project 21" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="22.jpg" alt="Project 22" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="23.jpg" alt="Tu Bhetshi Navyane 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tu Bhetshi Navyane 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="24.jpg" alt="Tu Bhetshi Navyane 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tu Bhetshi Navyane 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="25.jpg" alt="Tu Bhetshi Navyane 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tu Bhetshi Navyane 3</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="26.jpg" alt="Tu Bhetshi Navyane 4" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tu Bhetshi Navyane 4</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="27.jpg" alt="Har Ghar Nal Se Jal" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Har Ghar Nal Se Jal</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="28.jpg" alt="Kitchen Garden 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kitchen Garden 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="29.jpg" alt="Kitchen Garden 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kitchen Garden 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="30.jpg" alt="Kitchen Garden 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kitchen Garden 3</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="31.jpg" alt="Kitchen Garden 4" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kitchen Garden 4</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="32.jpg" alt="Project 32" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kabaddi Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="33.jpg" alt="NEED Sporting Club - Youth Training" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">NEED Sporting Club - Youth Training</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="34.jpg" alt="Project 34" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kabaddi Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="35.jpg" alt="Project 35" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Kabaddi Project</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="about.jpeg" alt="About NEED" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">About NEED</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="logo.jpeg" alt="NEED Logo" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">NEED Logo</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="NEED.png" alt="NEED Main Partner Logo" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">NEED Main Partner Logo</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t1.jpg" alt="Tanabana Project 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana Project 1</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t2.jpg" alt="Tanabana Project 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana Project 2</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t3.jpg" alt="Tanabana Project 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t4.jpg" alt="Tanabana Project 4" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t5.jpg" alt="Tanabana Project 5" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="t6.jpg" alt="Tanabana Project 6" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Tanabana</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="jalmani 1.jpeg" alt="Jalmani 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Jalmani</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="Jalmani 2.jpeg" alt="Jalmani 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Jalmani</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="Jalmani 3.jpeg" alt="Jalmani 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Jalmani</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="Jalmani 4.jpeg" alt="Jalmani 4" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Jalmani</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="en1.jpeg" alt="Environment 1" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Environment</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="en2.jpeg" alt="Environment 2" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Environment</h3></div></div>
+                <div class="gallery-item" data-aos="fade-up"><img src="en3.jpeg" alt="Environment 3" class="gallery-image"><div class="gallery-overlay"><h3 class="gallery-title">Environment</h3></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Modal HTML -->
+    <div class="contact-modal-backdrop" id="contactModalBackdrop">
+        <div class="contact-modal" role="dialog" aria-modal="true" tabindex="-1">
+            <button class="contact-modal-close" id="contactModalClose" aria-label="Close contact info">&times;</button>
+            <div class="contact-modal-title">Contact Information</div>
+            <ul class="contact-modal-list">
+                <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-modal-text">NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</span></li>
+                <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">99217 47531, 89997 22703</span></li>
+                <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-phone"></i></span><span class="contact-modal-text">97659 33586, 98812 74861</span></li>
+                <li class="contact-modal-item"><span class="contact-modal-icon"><i class="fas fa-envelope"></i></span><span class="contact-modal-text">need.kolam@gmail.com</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-row-flex">
+                    <div class="footer-links-section footer-quick-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html">Home</a></li>
+                            <li class="footer-link"><a href="index.html#about">About Us</a></li>
+                            <li class="footer-link"><a href="projects.html">Projects</a></li>
+                            <li class="footer-link"><a href="team.html">Our Team</a></li>
+                            <li class="footer-link"><a href="gallery.html">Gallery</a></li>
+                            <li class="footer-link"><a href="reports.html">Reports</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-section footer-projects">
+                        <h4 class="footer-title">Our Projects</h4>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html#education">Education</a></li>
+                            <li class="footer-link"><a href="index.html#women-empowerment">Healthcare</a></li>
+                            <li class="footer-link"><a href="index.html#community">Environment</a></li>
+                            <li class="footer-link"><a href="index.html#women-empowerment">Women Empowerment</a></li>
+                            <li class="footer-link"><a href="index.html#community">Rural Development</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-links-section footer-contact">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li class="footer-link"><i class="fas fa-map-marker-alt"></i> NEED Center, Khairgaon Bhedi,<br>Maregaon, Dist. Yavatmal,<br>PIN-445303, Maharashtra.</li>
+                        <li class="footer-link"><i class="fas fa-phone"></i> 99217 47531, 89997 22703<br>97659 33586, 98812 74861</li>
+                        <li class="footer-link"><i class="fas fa-envelope"></i> need.kolam@gmail.com</li>
+                        <li class="footer-link"><i class="fas fa-clock"></i> Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NEED Organization. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Improved navbar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navbarToggle = document.querySelector('.navbar-toggle');
+            const navbarMenu = document.querySelector('.navbar-menu');
+            let isMenuOpen = false;
+
+            // Handle scroll event with throttling
+            let lastScrollTime = 0;
+            const scrollThrottle = 10;
+
+            function handleScroll() {
+                const now = Date.now();
+                if (now - lastScrollTime >= scrollThrottle) {
+                    lastScrollTime = now;
+                    
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+            }
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+
+            // Toggle menu function
+            function toggleMenu(event) {
+                event.stopPropagation();
+                isMenuOpen = !isMenuOpen;
+                navbarMenu.classList.toggle('active');
+                navbarToggle.innerHTML = isMenuOpen ? 
+                    '<i class="fas fa-times"></i>' : 
+                    '<i class="fas fa-bars"></i>';
+                
+                document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+            }
+
+            // Close menu function
+            function closeMenu() {
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    navbarMenu.classList.remove('active');
+                    navbarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Event Listeners
+            navbarToggle.addEventListener('click', toggleMenu);
+            document.addEventListener('click', (e) => {
+                if (isMenuOpen && !navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
+            // Prevent menu close when clicking inside menu
+            navbarMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Handle window resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                if (resizeTimeout) {
+                    clearTimeout(resizeTimeout);
+                }
+                
+                resizeTimeout = setTimeout(() => {
+                    if (window.innerWidth > 768 && isMenuOpen) {
+                        closeMenu();
+                    }
+                }, 100);
+            });
+
+            // Gallery filter functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                });
+            });
+
+            // Initial scroll check
+            handleScroll();
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal logic
+            const contactModalBackdrop = document.getElementById('contactModalBackdrop');
+            const contactModalClose = document.getElementById('contactModalClose');
+            // Find all Contact links in navbar
+            document.querySelectorAll('.nav-link').forEach(function(link) {
+                const linkText = link.textContent.trim().toLowerCase();
+                const linkHref = link.getAttribute('href');
+                if (linkText === 'contact' || (linkHref && linkHref.toLowerCase().includes('contact'))) {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        contactModalBackdrop.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        // Animate items
+                        document.querySelectorAll('.contact-modal-item').forEach(function(item) {
+                            item.style.opacity = 0;
+                            item.style.transform = 'translateY(30px)';
+                            setTimeout(function() { item.style.opacity = ''; item.style.transform = ''; }, 10);
+                        });
+                    });
+                }
+            });
+            // Close modal
+            function closeContactModal() {
+                contactModalBackdrop.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            contactModalClose.addEventListener('click', closeContactModal);
+            contactModalBackdrop.addEventListener('click', function(e) {
+                if (e.target === contactModalBackdrop) closeContactModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && contactModalBackdrop.classList.contains('active')) closeContactModal();
+            });
+        });
+    </script>
+</body>
+</html> 
